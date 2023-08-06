@@ -1,4 +1,5 @@
-export const binarySearch = (list, searchingFor) => {
+import {BinarySearchFn} from "./types"
+export const binarySearch: BinarySearchFn = (list, searchingFor) => {
     let low = 0
     let high = list.length - 1
 
@@ -17,6 +18,14 @@ export const binarySearch = (list, searchingFor) => {
     }
     return null
 }
+
+const testFn = () => {
+    console.log(binarySearch([1], 1), "0")
+    console.log(binarySearch([1], 2), "null")
+}
+
+testFn()
+
 console.log(binarySearch([1], 1), "0")
 console.log(binarySearch([1], 2), "null")
 console.log(binarySearch([1, 2], 2), "1")

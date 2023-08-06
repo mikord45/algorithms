@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+      "outDir": "./dist/",
+      "noImplicitAny": true,
+      //https://stackoverflow.com/questions/41993811/understanding-target-and-module-in-tsconfig
+      "module": "es6",
+      "target": "es5",
+      "allowJs": true,
+      "moduleResolution": "node"
+    }
+  }

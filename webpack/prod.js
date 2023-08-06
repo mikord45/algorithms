@@ -3,13 +3,17 @@ const path = require('path');
 module.exports = {
   mode: 'production',
   entry: {
-    index:'./src/index.js',
+    index:'./src/index.ts',
+  },
+  resolve: {
+    extensions: ['.ts', '.js'],
   },
   module: {
     rules:[{
-      test: /\.(?:js|mjs|cjs)$/,
+      test: /\.(?:js|ts)$/,
       exclude: /node_modules/,
-      use: {
+      use: [
+      {
         loader: 'babel-loader',
         options: {
           presets: [
@@ -18,7 +22,12 @@ module.exports = {
             ['@babel/preset-env', { targets: "defaults" }]
           ]
         }
+      },
+      // I know that, using both ts-loader and babel-loader at the same time might be redundant, but I wanted to do it just for learning purposes  
+      {
+        loader: 'ts-loader'
       }
+    ]
     }]
   },
   output: {
