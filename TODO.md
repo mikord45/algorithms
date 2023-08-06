@@ -1,0 +1,1 @@
+1. Consider changing webpack/babel target to node from browser
