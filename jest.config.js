@@ -12,12 +12,12 @@
 //   };
 
 const config = {
-    testEnvironment: 'node',
-    transform: {
-        '^.+\\.ts?$': 'ts-jest',
-        // https://kulshekhar.github.io/ts-jest/docs/getting-started/options
-    },
-    transformIgnorePatterns: ['<rootDir>/node_modules/'],
+	testEnvironment: "node",
+	transform: {
+		"^.+\\.ts?$": "ts-jest",
+		// https://kulshekhar.github.io/ts-jest/docs/getting-started/options
+	},
+	transformIgnorePatterns: ["<rootDir>/node_modules/"],
 }
 
 export default config
