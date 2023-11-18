@@ -1,1 +1,1 @@
-import "./binarySearch";
+export {binarySearch} from "./binarySearch";

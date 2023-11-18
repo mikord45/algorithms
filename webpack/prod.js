@@ -1,6 +1,10 @@
-const path = require('path');
+import path from 'path'
+import { fileURLToPath } from 'url';
 
-module.exports = {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const setup = {
   mode: 'production',
   entry: {
     index:'./src/index.ts',
@@ -18,8 +22,8 @@ module.exports = {
         options: {
           presets: [
             // babel/preset-env - allows to transform all newest features of JS
-            // target: defaults - transoforms it into JS compatible with browsers, that have more than 0,5% of market share
-            ['@babel/preset-env', { targets: "defaults" }]
+            // targets: defaults - transoforms it into JS compatible with browsers, that have more than 0,5% of market share
+            ['@babel/preset-env', { targets: "node 18.15.0" }]
           ]
         }
       },
@@ -36,3 +40,5 @@ module.exports = {
     clean: true
   },
 };
+
+export default setup
