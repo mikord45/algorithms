@@ -1,1 +1,1 @@
-export {binarySearch} from "./binarySearch"
+export {binarySearch} from "./binary-search"
