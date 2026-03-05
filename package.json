@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "test": "jest",
+    "test:path": "jest --runTestsByPath",
     "build": "webpack --mode production",
     "dev": "webpack --mode development"
   },
