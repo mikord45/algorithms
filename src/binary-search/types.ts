@@ -1,1 +1,0 @@
-export type BinarySearchFn = (arr: number[], searchingFor: number) => number | null

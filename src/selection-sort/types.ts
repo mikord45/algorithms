@@ -1,1 +1,0 @@
-export type SelectionSearchFn = (list: number[], desc?: boolean) => number[]

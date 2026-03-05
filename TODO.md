@@ -1,3 +1,2 @@
-1. Getting rid of dedicated types.ts files
-2. Running single tests
-3. Create github actions and include jest tests in them
+1. Running single tests
+2. Create github actions and include jest tests in them

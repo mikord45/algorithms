@@ -1,4 +1,4 @@
-import { BinarySearchFn } from "./types"
+type BinarySearchFn = (arr: number[], searchingFor: number) => number | null
 export const binarySearch: BinarySearchFn = (list, searchingFor) => {
 	let low = 0
 	let high = list.length - 1

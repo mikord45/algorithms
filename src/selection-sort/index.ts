@@ -1,4 +1,4 @@
-import { SelectionSearchFn } from "./types"
+type SelectionSearchFn = (list: number[], desc?: boolean) => number[]
 
 const getNextElement = (list: number[], desc?: boolean): { result: number, list: number[] } => {
 	let result = list[0]
