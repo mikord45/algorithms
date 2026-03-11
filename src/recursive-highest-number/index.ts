@@ -7,5 +7,5 @@ export const recursiveHighestNumber: RecursiveHighestNumberFn = (list, previousH
 
   const currentElement = list.shift()
   const highest = (!previousHighest || currentElement > previousHighest) ? currentElement : previousHighest
-  return recursiveHighestNumber(list, highest)
+  return recursiveHighestNumber([...list], highest)
 }

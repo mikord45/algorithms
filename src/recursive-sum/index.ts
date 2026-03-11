@@ -5,5 +5,5 @@ export const recursiveSum:RecursiveSumFn = (list) => {
     return 0
   }
   const currentElement = list.shift()
-  return currentElement + recursiveSum(list) 
+  return currentElement + recursiveSum([...list]) 
 }
