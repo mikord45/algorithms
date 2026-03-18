@@ -87,7 +87,6 @@ export class CustomMap {
     const elements = [...this.table]
     this.table = new Array(2 * this.table.length)
 
-    console.log("test2 elements: ", elements)
     elements.forEach((currentElement)=>{
       if(currentElement){
         if(!Array.isArray(currentElement)){
