@@ -1,0 +1,35 @@
+1. Fix differences between TS checks in VSC and in Jest (reason for all those type assertions)
+2. Add tests:
+    - 1:
+        - empty map 
+            - nothing might be found
+        - add some elements
+            - verify that there are no (or little) collisions
+            - verify that elements might be found
+        - add some elements
+        - remove some elements
+            - verify that there are no (or little) collisions
+            - verify that still existing elements might be found
+            - verify that removed elements can't be found
+    - 2 (adjsut threshold in isTooCrowded() if necessary)
+        (if all cases of get() / add() / delete() can't be tested in a given situation, 
+        skip them, but make sure, that every case is tested at least once in the course of entire test suite):
+        - empty map (probably with some small size)
+            - nothing might be found
+        - add some elements (all 3 cases of add())
+            - map structure is handled correctly (table structure, numberOfElementsInTable etc.)
+            - verify that existing elements might be found & non existing might not (all 3 cases of get())
+        - remove some elements (all 3 cases of delete())
+            - map structure is handled correctly (table structure, numberOfElementsInTable etc.)
+            - verify that existing elements might be found & non existing might not (all 3 cases of get())
+        - add some elements (all 3 cases of add())
+            - verify that reshaping has been triggered (all 2 cases of reshape())
+            - map structure is handled correctly (table structure, numberOfElementsInTable etc.)
+            - verify that existing elements might be found & non existing might not (all 3 cases of get())
+        - remove some elements (all 3 cases of delete())
+            - map structure is handled correctly (table structure, numberOfElementsInTable etc.)
+            - verify that existing elements might be found & non existing might not (all 3 cases of get())
+        - add some elements (all 3 cases of add())
+            - verify that reshaping has been triggered (all 2 cases of reshape())
+            - map structure is handled correctly (table structure, numberOfElementsInTable etc.)
+            - verify that existing elements might be found & non existing might not (all 3 cases of get())
