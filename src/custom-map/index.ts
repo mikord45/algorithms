@@ -39,6 +39,10 @@ export class CustomMap {
   }
 
   add(key: string, value: unknown) {
+    if(this.get(key) !== undefined){
+      return
+    }
+
     const hash = this.getHash(key)
     const index = this.getIndex(hash)
 
