@@ -69,7 +69,10 @@ export class CustomMap {
     const hash = this.getHash(key)
     const index = this.getIndex(hash)
 
-    if(!Array.isArray(this.table[index])){
+    if(this.table[index] === undefined){
+      return 
+    }
+    else if(!Array.isArray(this.table[index])){
       this.table[index] = undefined
     }
     else if((this.table[index] as TableElement[]).length === 2) {
