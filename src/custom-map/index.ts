@@ -54,9 +54,9 @@ export class CustomMap {
         const previousElement: TableElement = {...this.table[index] as TableElement}
         this.table[index] = [previousElement, {key, value}]
       }
+    } else {
+      this.table[index] = { key, value}
     }
-
-    this.table[index] = { key, value}
 
     this.numberOfElementsInTable += 1
     
