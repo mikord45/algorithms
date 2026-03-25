@@ -32,7 +32,7 @@ export class CustomMap {
     }
 
     if(!Array.isArray(this.table[index])){
-      return this.table[index]
+      return (this.table[index] as TableElement).key === key ? this.table[index] : undefined
     }
 
     return (this.table[index] as TableElement[]).find((element) => element.key === key)
