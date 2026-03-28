@@ -55,7 +55,7 @@ describe("Looking for a given node by its name", ()=>{
     expect(node32.depth).toBeUndefined()
   })
 
-  it(" node exists", () => {
+  it("node exists", () => {
     const {startingPoint, node1, node32} = getDestinationGraphNodes(false)
 
     expect(getPathBFS(startingPoint, "Piotr")).toEqual({
@@ -67,4 +67,20 @@ describe("Looking for a given node by its name", ()=>{
     expect(node1.depth).toBeUndefined()
     expect(node32.depth).toBeUndefined()
   })
+})
+
+describe("Infinite Loop", ()=>{
+  it("Infinite loop doesn't happen", () => {
+    const node1 = new GraphNode("Node1", [])
+    const node21 = new GraphNode("Node21", [])
+    const node22 = new GraphNode("Node22", [])
+    const node2 = new GraphNode("Node2", [node21, node22])
+    node1.linkedWith = [node2]
+    node2.linkedWith.push(node1)
+
+    expect(getPathBFS(node1)).toEqual({
+      exists: false
+    })
+  })
+
 })

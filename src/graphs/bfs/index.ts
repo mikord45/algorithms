@@ -19,7 +19,7 @@ export const getPathBFS = (startingPoint: GraphNode, lookingForName?: string) =>
   const nodesToVisit: GraphNode[] = startingPoint.linkedWith.map((current) => {
     return Object.assign({depth: 1}, current)
   })
-  const visitedNodesIds: Set<string> = new Set([])
+  const visitedNodesIds: Set<string> = new Set([startingPoint.id])
 
   while (nodesToVisit.length > 0){
     const currentElement = nodesToVisit.shift()
