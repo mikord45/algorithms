@@ -4,3 +4,4 @@
 4. Create github actions and include jest tests in them
 5. Research: Tail Recursion
 6. Idea: Revolut algorithm for sending back money
+7. Idea: Some linked lists exercises, like reverting etc.
