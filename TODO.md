@@ -3,3 +3,4 @@
 3. Create directory-specific file names instead of index.ts everywhere.
 4. Create github actions and include jest tests in them
 5. Research: Tail Recursion
+6. Idea: Revolut algorithm for sending back money
