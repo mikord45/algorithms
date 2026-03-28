@@ -15,7 +15,7 @@ export class GraphNode {
   }
 }
 
-export const getPathBFS = (startingPoint: GraphNode) => {
+export const getPathBFS = (startingPoint: GraphNode, lookingForName?: string) => {
   const nodesToVisit: GraphNode[] = startingPoint.linkedWith.map((current) => {
     return Object.assign({depth: 1}, current)
   })
@@ -29,7 +29,7 @@ export const getPathBFS = (startingPoint: GraphNode) => {
     }
     visitedNodesIds.add(currentElement.id)
 
-    if(currentElement.isDestination){
+    if((!lookingForName && currentElement.isDestination) || (currentElement.name === lookingForName)){
       return {
         exists: true,
         pathLength: currentElement.depth

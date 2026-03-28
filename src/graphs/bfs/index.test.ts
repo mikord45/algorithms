@@ -41,3 +41,30 @@ describe("Looking for a given node", ()=>{
     expect(node32.depth).toBeUndefined()
   })
 })
+
+describe("Looking for a given node by its name", ()=>{
+  it("node doesn't exist", () => {
+    const {startingPoint, node1, node32} = getDestinationGraphNodes(false)
+
+    expect(getPathBFS(startingPoint, "Jan")).toEqual({
+      exists: false,
+    })
+
+    // no depth property saved on actual nodes
+    expect(node1.depth).toBeUndefined()
+    expect(node32.depth).toBeUndefined()
+  })
+
+  it(" node exists", () => {
+    const {startingPoint, node1, node32} = getDestinationGraphNodes(false)
+
+    expect(getPathBFS(startingPoint, "Piotr")).toEqual({
+      exists: true,
+      pathLength: 2
+    })
+
+    // no depth property saved on actual nodes
+    expect(node1.depth).toBeUndefined()
+    expect(node32.depth).toBeUndefined()
+  })
+})
