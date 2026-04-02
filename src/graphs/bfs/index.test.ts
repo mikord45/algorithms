@@ -158,6 +158,59 @@ describe("Topology Sort", () => {
     expect(topologySortBFS(node1).map((current) => current.name)).toEqual(["Node1", "Node21", "Node22", "Node31", "Node32", "Node41", "Node42"])
   })
 
+  it("Sorts very complex graph", () => {
+    const node44 = new GraphNode("Node44", [])
+    const node43 = new GraphNode("Node43", [node44])
+    const node42 = new GraphNode("Node42", [])
+    const node41 = new GraphNode("Node41", [])
+    const node33 = new GraphNode("Node33", [node44])
+    const node32 = new GraphNode("Node32", [node43, node33])
+    const node31 = new GraphNode("Node31", [node41, node42])
+    const node23 = new GraphNode("Node23", [node32, node33])
+    const node22 = new GraphNode("Node22", [node31, node32])
+    const node21 = new GraphNode("Node21", [node31])
+    const node1 = new GraphNode("Node1", [node21, node22, node23])
+    node42.linkedWith.push(node32)
+
+    expect(topologySortBFS(node1).map((current) => current.name)).toEqual(["Node1", "Node21", "Node22", "Node23", "Node31", "Node41", "Node42", "Node32", "Node43", "Node33", "Node44"])
+  })
+
+  it("Throws on cycle in very complex graph" , ()=>{
+    const node44 = new GraphNode("Node44", [])
+    const node43 = new GraphNode("Node43", [node44])
+    const node42 = new GraphNode("Node42", [])
+    const node41 = new GraphNode("Node41", [])
+    const node33 = new GraphNode("Node33", [node44])
+    const node32 = new GraphNode("Node32", [node43, node33])
+    const node31 = new GraphNode("Node31", [node41, node42])
+    const node23 = new GraphNode("Node23", [node32, node33])
+    const node22 = new GraphNode("Node22", [node31, node32])
+    const node21 = new GraphNode("Node21", [node31])
+    const node1 = new GraphNode("Node1", [node21, node22, node23])
+    node42.linkedWith.push(node32)
+    node43.linkedWith.push(node31)
+
+    expect(() => topologySortBFS(node1)).toThrowError("Graph has cycles")
+  })
+
+  it("Throws on cycle in very complex graph 2" , ()=>{
+    const node44 = new GraphNode("Node44", [])
+    const node43 = new GraphNode("Node43", [node44])
+    const node42 = new GraphNode("Node42", [])
+    const node41 = new GraphNode("Node41", [])
+    const node33 = new GraphNode("Node33", [node44])
+    const node32 = new GraphNode("Node32", [node43, node33])
+    const node31 = new GraphNode("Node31", [node41, node42])
+    const node23 = new GraphNode("Node23", [node32, node33])
+    const node22 = new GraphNode("Node22", [node31, node32])
+    const node21 = new GraphNode("Node21", [node31])
+    const node1 = new GraphNode("Node1", [node21, node22, node23])
+    node42.linkedWith.push(node32)
+    node44.linkedWith.push(node32)
+
+    expect(() => topologySortBFS(node1)).toThrowError("Graph has cycles")
+  })
+
   it("Sorts simple graph correctly", ()=>{
     const node4 = new GraphNode("Node4", [])
     const node2 = new GraphNode("Node2", [])
