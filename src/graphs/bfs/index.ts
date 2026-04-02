@@ -7,7 +7,6 @@ export class GraphNode {
   linkedWith: GraphNode[]
   isDestination: boolean
   depth?: number
-  parent?: GraphNode
 
   constructor(name: string, linkedWith: GraphNode[] = [], isDestination = false){
     this.id = randomUUID()
@@ -47,7 +46,6 @@ export const getPathBFS = (startingPoint: GraphNode, lookingForName?: string) =>
   }
 }
 
-// verify that, this function and tests are correct and try to create harder, more nested etc. test cases
 export const topologySortBFS = (startingPoint: GraphNode) => {
   const nodesToVisit: GraphNode[] = startingPoint.linkedWith.map((current) => {
     return Object.assign({}, current)
@@ -74,9 +72,8 @@ export const topologySortBFS = (startingPoint: GraphNode) => {
     sortedNodes.push(Object.assign({}, currentElement) )
 
     nodesToVisit.push(...currentElement.linkedWith.map((current) => {
-      return Object.assign({parent: currentElement}, current)
+      return Object.assign({}, current)
     }))
-
   }
 
   return sortedNodes
