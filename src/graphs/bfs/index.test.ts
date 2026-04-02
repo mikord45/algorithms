@@ -158,6 +158,24 @@ describe("Topology Sort", () => {
     expect(topologySortBFS(node1).map((current) => current.name)).toEqual(["Node1", "Node21", "Node22", "Node31", "Node32", "Node41", "Node42"])
   })
 
+  it("Sorts graph correctly revisiting node 3 times", ()=>{
+    const node51 = new GraphNode("Node51", [])
+    const node41 = new GraphNode("Node41", [node51])
+    const node34 = new GraphNode("Node34", [node41])
+    const node33 = new GraphNode("Node33", [])
+    const node32 = new GraphNode("Node32", [])
+    const node31 = new GraphNode("Node31", [])
+    const node23 = new GraphNode("Node23", [node34])
+    const node22 = new GraphNode("Node22", [node33])
+    const node21 = new GraphNode("Node21", [node31, node32])
+    const node1 = new GraphNode("Node1", [node21, node22, node23])
+    node33.linkedWith.push(node21)
+    node41.linkedWith.push(node21)
+    node32.linkedWith.push(node51)
+
+    expect(topologySortBFS(node1).map((current) => current.name)).toEqual(["Node1", "Node22", "Node23", "Node33", "Node34", "Node41", "Node21", "Node31", "Node32", "Node51"])
+  })
+
   it("Sorts very complex graph", () => {
     const node44 = new GraphNode("Node44", [])
     const node43 = new GraphNode("Node43", [node44])
