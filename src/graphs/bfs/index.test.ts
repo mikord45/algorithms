@@ -1,4 +1,4 @@
-import { getPathBFS, GraphNode, topologySortBFS } from "."
+import { getPathBFS, GraphNode, isTreeBFS, topologySortBFS } from "."
 
 const getDestinationGraphNodes = (destinationExists: boolean) => {
   const node32 = new GraphNode("Piotr", [], destinationExists)
@@ -263,5 +263,83 @@ describe("Topology Sort", () => {
     node31.linkedWith.push(node311, node312)
 
     expect(topologySortBFS(startingPoint).map((current) => current.name)).toEqual(["Me", "Bartek", "Cecylia", "Alicja", "Janusz", "Tamara", "Jarek", "Patrycja", "Piotr", "Node311", "Node312"])
+  })
+})
+
+describe("Trees", () => { 
+  it("Detects a tree correctly - 1", ()=>{
+    const node34 = new GraphNode("Node34")
+    const node33 = new GraphNode("Node33")
+    const node32 = new GraphNode("Node32")
+    const node31 = new GraphNode("Node31")
+    const node22 = new GraphNode("Node22", [node33, node34])
+    const node21 = new GraphNode("Node21", [node31, node32])
+    const node1 = new GraphNode("Node1", [node21, node22])
+
+    expect(isTreeBFS(node1)).toBe(true)
+  })
+
+  it("Detects a tree correctly - 2", ()=>{
+    const node32 = new GraphNode("Node32")
+    const node31 = new GraphNode("Node31")
+    const node22 = new GraphNode("Node22", [])
+    const node21 = new GraphNode("Node21", [node31, node32])
+    const node1 = new GraphNode("Node1", [node21, node22])
+
+    expect(isTreeBFS(node1)).toBe(true)
+  })
+
+  it("Detects a tree correctly - 3", ()=>{
+    const node31 = new GraphNode("Node31")
+    const node22 = new GraphNode("Node22", [])
+    const node21 = new GraphNode("Node21", [node31])
+    const node1 = new GraphNode("Node1", [node21, node22])
+
+    expect(isTreeBFS(node1)).toBe(true)
+  })
+
+  it("Detects not a tree correctly - 1", ()=>{
+    const node34 = new GraphNode("Node34")
+    const node33 = new GraphNode("Node33")
+    const node32 = new GraphNode("Node32")
+    const node31 = new GraphNode("Node31")
+    const node22 = new GraphNode("Node22", [node33, node34])
+    const node21 = new GraphNode("Node21", [node31, node32])
+    const node1 = new GraphNode("Node1", [node21, node22])
+    node31.linkedWith.push(node21)
+
+    expect(isTreeBFS(node1)).toBe(false)
+  })
+
+  it("Detects not a tree correctly - 2", ()=>{
+    const node32 = new GraphNode("Node32")
+    const node31 = new GraphNode("Node31")
+    const node22 = new GraphNode("Node22", [node31, node32])
+    const node21 = new GraphNode("Node21", [])
+    const node1 = new GraphNode("Node1", [node21, node22])
+    node31.linkedWith.push(node21)
+
+    expect(isTreeBFS(node1)).toBe(false)
+  })
+
+  it("Detects not a tree correctly - 3", ()=>{
+    const node32 = new GraphNode("Node32")
+    const node31 = new GraphNode("Node31")
+    const node22 = new GraphNode("Node22", [node31, node32])
+    const node21 = new GraphNode("Node21", [])
+    const node1 = new GraphNode("Node1", [node21, node22])
+    node32.linkedWith.push(node1)
+
+    expect(isTreeBFS(node1)).toBe(false)
+  })
+
+  it("Detects not a tree correctly - 4", ()=>{
+    const node32 = new GraphNode("Node32")
+    const node31 = new GraphNode("Node31")
+    const node22 = new GraphNode("Node22", [node31, node32])
+    const node21 = new GraphNode("Node21", [node31])
+    const node1 = new GraphNode("Node1", [node21, node22])
+
+    expect(isTreeBFS(node1)).toBe(false)
   })
 })

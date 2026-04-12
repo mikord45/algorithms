@@ -46,6 +46,28 @@ export const getPathBFS = (startingPoint: GraphNode, lookingForName?: string) =>
   }
 }
 
+export const isTreeBFS = (startingPoint: GraphNode) => {
+  const nodesToVisit: GraphNode[] = startingPoint.linkedWith.map((current) => {
+    return Object.assign({}, current)
+  })
+  const visitedNodesIds: Set<string> = new Set([startingPoint.id])
+
+  while (nodesToVisit.length > 0){
+    const currentElement = nodesToVisit.shift()
+
+    if(visitedNodesIds.has(currentElement.id)){
+      return false
+    }
+    visitedNodesIds.add(currentElement.id)
+
+    nodesToVisit.push(...currentElement.linkedWith.map((current) => {
+      return Object.assign({}, current)
+    }))
+  }
+
+  return true
+}
+
 export const topologySortBFS = (startingPoint: GraphNode) => {
   const nodesToVisit: GraphNode[] = startingPoint.linkedWith.map((current) => {
     return Object.assign({}, current)
