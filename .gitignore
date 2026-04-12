@@ -3,3 +3,4 @@
 TODO.txt
 *.png
 !DijkstraLimitations.png
+!src/graphs/dijkstra/finding-lowest-cost-node-improvement/*.png
