@@ -9,7 +9,7 @@ describe("Detects path correctly", () => {
     const node12 = new DijkstraGraphNode("12", [{node: node11, cost: 8}, {node: node22, cost: 7}])
     const nodeStart = new DijkstraGraphNode("Start", [{node: node11, cost: 5}, {node: node12, cost: 2}])
 
-    expect(getPathDijkstra(nodeStart, nodeEnd.id)).toBe(8)
+    expect(getPathDijkstra(nodeStart, nodeEnd.id)).toEqual({cost: 8, path: ["Start", "11", "22", "End"]})
   })
 
   it("example 2", () => {
@@ -20,7 +20,7 @@ describe("Detects path correctly", () => {
     const nodeStart = new DijkstraGraphNode("Start", [{node: node11, cost: 10}])
     node21.linkedWith.push({node: node11, cost: 1})
 
-    expect(getPathDijkstra(nodeStart, nodeEnd.id)).toBe(60)
+    expect(getPathDijkstra(nodeStart, nodeEnd.id)).toEqual({cost: 60, path: ["Start", "11", "31", "End"]})
   })
 
   it("example 3", () => {
@@ -32,7 +32,7 @@ describe("Detects path correctly", () => {
     const node11 = new DijkstraGraphNode("11", [{node: node31, cost: 21}])
     const nodeStart = new DijkstraGraphNode("Start", [{node: node11, cost: 4}, {node: node12, cost: 10}])
 
-    expect(getPathDijkstra(nodeStart, nodeEnd.id)).toBe(24)
+    expect(getPathDijkstra(nodeStart, nodeEnd.id)).toEqual({cost: 24, path: ["Start", "12", "21", "31", "End"]})
   })
 
   it("example 4", () => {
@@ -41,7 +41,7 @@ describe("Detects path correctly", () => {
     const node12 = new DijkstraGraphNode("12", [{node: node11, cost: 3}, {node: nodeEnd, cost: 5}])
     const nodeStart = new DijkstraGraphNode("Start", [{node: node11, cost: 6}, {node: node12, cost: 2}])
 
-    expect(getPathDijkstra(nodeStart, nodeEnd.id)).toBe(6)
+    expect(getPathDijkstra(nodeStart, nodeEnd.id)).toEqual({cost: 6, path: ["Start", "12", "11", "End"]})
   })
 
   it("example 5", () => {
@@ -51,7 +51,7 @@ describe("Detects path correctly", () => {
     const nodeStart = new DijkstraGraphNode("Start", [{node: node12, cost: 2}])
     node11.linkedWith.push({node: node12, cost: 4})
 
-    expect(getPathDijkstra(nodeStart, nodeEnd.id)).toBe(5)
+    expect(getPathDijkstra(nodeStart, nodeEnd.id)).toEqual({cost: 5, path: ["Start", "12", "End"]})
   })
 
   it("example 6", () => {
@@ -62,7 +62,7 @@ describe("Detects path correctly", () => {
     const node11 = new DijkstraGraphNode("11", [{node: node21, cost: 15}, {node: node22, cost: 20}])
     const nodeStart = new DijkstraGraphNode("Start", [{node: node11, cost: 5}, {node: node12, cost: 0}])
 
-    expect(getPathDijkstra(nodeStart, nodeEnd.id)).toBe(35)
+    expect(getPathDijkstra(nodeStart, nodeEnd.id)).toEqual({cost: 35, path: ["Start", "11", "22", "End"]})
   })
 
   it("example 7", () => {
@@ -72,6 +72,6 @@ describe("Detects path correctly", () => {
     const nodeStart = new DijkstraGraphNode("Start", [{node: node11, cost: 6}, {node: node12, cost: 2}])
     node12.linkedWith.push({node: node11, cost: 1})
 
-    expect(getPathDijkstra(nodeStart, nodeEnd.id)).toBe(5)
+    expect(getPathDijkstra(nodeStart, nodeEnd.id)).toEqual({cost: 5, path: ["Start", "12", "End"]})
   })
 })

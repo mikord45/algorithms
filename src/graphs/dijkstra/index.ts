@@ -14,7 +14,7 @@ export class DijkstraGraphNode extends GraphNode {
 }
 
 export const getPathDijkstra = (start: DijkstraGraphNode, goalId?: string) => {
-  const results = new Map(start.linkedWith.map(({node: {id: id}, cost}) => ([id, {parentId: start.id, parentName: start.name, totalCost: cost}])))
+  const results = new Map(start.linkedWith.map(({node: {id, name}, cost}) => ([id, {parentId: start.id, parentName: start.name, name, totalCost: cost}])))
   const nodes = start.linkedWith.map(({node}) => {
     return Object.assign({}, node)
   })
@@ -45,12 +45,12 @@ export const getPathDijkstra = (start: DijkstraGraphNode, goalId?: string) => {
       if(currentLinkedNode){
         const newTotalCost = results.get(lowestCostNode.id).totalCost + cost
         if(newTotalCost < currentLinkedNode.totalCost){
-          results.set(node.id, {parentId: lowestCostNode.id, parentName: lowestCostNode.name, totalCost: newTotalCost})
+          results.set(node.id, {parentId: lowestCostNode.id, parentName: lowestCostNode.name, name: node.name, totalCost: newTotalCost})
         }
       }
       else{
         nodes.push(Object.assign({}, node))
-        results.set(node.id, {parentId: lowestCostNode.id, parentName: lowestCostNode.name, totalCost: results.get(lowestCostNode.id).totalCost + cost})
+        results.set(node.id, {parentId: lowestCostNode.id, parentName: lowestCostNode.name, name: node.name, totalCost: results.get(lowestCostNode.id).totalCost + cost})
       }
     })
 
@@ -58,5 +58,15 @@ export const getPathDijkstra = (start: DijkstraGraphNode, goalId?: string) => {
     processedNodesNumber += 1
   }
 
-  return results.get(goalId).totalCost
+  const getExactPath = (currentPath: string[], id: string): string[] => {
+    const {parentId, parentName} = results.get(id) ?? {}
+    if(parentId && parentName) {
+      currentPath.unshift(parentName)
+      return getExactPath(currentPath, parentId)
+    }
+
+    return currentPath
+  }
+
+  return {path: getExactPath([results.get(goalId).name], goalId), cost: results.get(goalId).totalCost} 
 }
