@@ -2,3 +2,4 @@
    - try some improvements eg. performance that depends on implementation
    - try different algorithms eg. A\* or Bellman-Ford Algorithm
 2. Implement way of finding node with lowest cost better than O(n)
+3. Try some algorithms for non directed graphs
