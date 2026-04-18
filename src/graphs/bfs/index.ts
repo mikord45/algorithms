@@ -1,23 +1,11 @@
-import { randomUUID } from "crypto"
+import { GraphNode } from "../common"
 
-// name as ids should be unique (for now)
-export class GraphNode {
-  id: string
-  name: string
-  linkedWith: GraphNode[]
-  isDestination: boolean
+export class BFSGraphNode extends GraphNode {
   depth?: number
-
-  constructor(name: string, linkedWith: GraphNode[] = [], isDestination = false){
-    this.id = randomUUID()
-    this.name = name
-    this.linkedWith = linkedWith
-    this.isDestination = isDestination
-  }
 }
 
-export const getPathBFS = (startingPoint: GraphNode, lookingForName?: string) => {
-  const nodesToVisit: GraphNode[] = startingPoint.linkedWith.map((current) => {
+export const getPathBFS = (startingPoint: BFSGraphNode, lookingForName?: string) => {
+  const nodesToVisit: BFSGraphNode[] = startingPoint.linkedWith.map((current) => {
     return Object.assign({depth: 1}, current)
   })
   const visitedNodesIds: Set<string> = new Set([startingPoint.id])
@@ -46,8 +34,8 @@ export const getPathBFS = (startingPoint: GraphNode, lookingForName?: string) =>
   }
 }
 
-export const isTreeBFS = (startingPoint: GraphNode) => {
-  const nodesToVisit: GraphNode[] = startingPoint.linkedWith.map((current) => {
+export const isTreeBFS = (startingPoint: BFSGraphNode) => {
+  const nodesToVisit: BFSGraphNode[] = startingPoint.linkedWith.map((current) => {
     return Object.assign({}, current)
   })
   const visitedNodesIds: Set<string> = new Set([startingPoint.id])
@@ -68,18 +56,18 @@ export const isTreeBFS = (startingPoint: GraphNode) => {
   return true
 }
 
-export const topologySortBFS = (startingPoint: GraphNode) => {
-  const nodesToVisit: GraphNode[] = startingPoint.linkedWith.map((current) => {
+export const topologySortBFS = (startingPoint: BFSGraphNode) => {
+  const nodesToVisit: BFSGraphNode[] = startingPoint.linkedWith.map((current) => {
     return Object.assign({}, current)
   })
   const visitedNodesIds: Set<string> = new Set([startingPoint.id])
-  let sortedNodes: GraphNode[] = [Object.assign({}, startingPoint)]
+  let sortedNodes: BFSGraphNode[] = [Object.assign({}, startingPoint)]
 
   while (nodesToVisit.length > 0){
     const currentElement = nodesToVisit.shift()
 
     if(visitedNodesIds.has(currentElement.id)){
-      const {exists: cycleExists} = getPathBFS(new GraphNode("Helper", [...currentElement.linkedWith]), currentElement.name)
+      const {exists: cycleExists} = getPathBFS(new BFSGraphNode("Helper", [...currentElement.linkedWith]), currentElement.name)
 
       if(cycleExists){
         throw new Error("Graph has cycles")
