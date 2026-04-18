@@ -11,7 +11,6 @@ export class BFSGraphNode extends GraphNode {
     this.isDestination = isDestination
 
   }
-
 }
 
 export const getPathBFS = (startingPoint: BFSGraphNode, lookingForName?: string) => {
