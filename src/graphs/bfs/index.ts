@@ -1,7 +1,17 @@
 import { GraphNode } from "../common"
 
 export class BFSGraphNode extends GraphNode {
+  isDestination: boolean
+  linkedWith: BFSGraphNode[]
   depth?: number
+  
+  constructor(name: string, linkedWith: BFSGraphNode[] = [], isDestination = false) {
+    super(name)
+    this.linkedWith = linkedWith
+    this.isDestination = isDestination
+
+  }
+
 }
 
 export const getPathBFS = (startingPoint: BFSGraphNode, lookingForName?: string) => {
