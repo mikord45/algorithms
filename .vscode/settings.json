@@ -1,4 +1,5 @@
 {
     "editor.formatOnSave": true,
-    "eslint.format.enable": true
+    "eslint.format.enable": true,
+    "js/ts.tsdk.path": "node_modules\\typescript\\lib"
 }
