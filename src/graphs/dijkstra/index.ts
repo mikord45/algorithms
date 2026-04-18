@@ -14,7 +14,7 @@ export class DijkstraGraphNode extends GraphNode {
 }
 
 export const getPathDijkstra = (start: DijkstraGraphNode, goalId?: string) => {
-  const results = new Map(start.linkedWith.map(({node: {id: id}, cost}) => ([id, {parent: start.id, totalCost: cost}])))
+  const results = new Map(start.linkedWith.map(({node: {id: id}, cost}) => ([id, {parentId: start.id, parentName: start.name, totalCost: cost}])))
   const nodes = start.linkedWith.map(({node}) => {
     return Object.assign({}, node)
   })
@@ -45,12 +45,12 @@ export const getPathDijkstra = (start: DijkstraGraphNode, goalId?: string) => {
       if(currentLinkedNode){
         const newTotalCost = results.get(lowestCostNode.id).totalCost + cost
         if(newTotalCost < currentLinkedNode.totalCost){
-          results.set(node.id, {parent: lowestCostNode.id, totalCost: newTotalCost})
+          results.set(node.id, {parentId: lowestCostNode.id, parentName: lowestCostNode.name, totalCost: newTotalCost})
         }
       }
       else{
         nodes.push(Object.assign({}, node))
-        results.set(node.id, {parent: lowestCostNode.id, totalCost: results.get(lowestCostNode.id).totalCost + cost})
+        results.set(node.id, {parentId: lowestCostNode.id, parentName: lowestCostNode.name, totalCost: results.get(lowestCostNode.id).totalCost + cost})
       }
     })
 
